@@ -1,4 +1,4 @@
-version 5.215.0
+version 5.216.0
 
 references: strict
 redirects: on
@@ -32,8 +32,8 @@ nuget System.Reflection.Metadata 1.4.2
 group build
     framework: net45
     source https://api.nuget.org/v3/index.json
-    nuget Paket.Core 5.215.0
-    nuget FAKE
+    nuget Paket.Core 5.216.0
+    nuget FAKE ~> 5.16.0
     nuget AjaxMin
     nuget FSharp.Core
     nuget Mono.Cecil
