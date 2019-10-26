@@ -37,6 +37,7 @@ type ProjectType =
     | Website
     | Html
     | WIG
+    | Proxy
 
     static member Parse(wsProjectType: string) =
         match wsProjectType.ToLower() with
@@ -46,6 +47,7 @@ type ProjectType =
         | "extension" | "interfacegenerator" -> Some WIG
         | "html" -> Some Html
         | "site" | "web" | "website" | "export" -> Some Website
+        | "proxy" -> Some Proxy
         | _ -> argError ("Invalid project type: " + wsProjectType)
 
 type JavaScriptScope =
@@ -78,6 +80,7 @@ type WsConfig =
         JavaScriptExport : JsExport[]
         JSOutputPath : string option
         MinJSOutputPath : string option
+        SingleNoJSErrors : bool
     }
 
     member this.ProjectDir =
@@ -110,6 +113,7 @@ type WsConfig =
              JavaScriptExport = [||]
              JSOutputPath = None
              MinJSOutputPath = None
+             SingleNoJSErrors = false
         }
 
     static member ParseAnalyzeClosures(c: string) =
@@ -210,6 +214,8 @@ type WsConfig =
                 res <- { res with JSOutputPath = Some (getPath k v) }
             | "minjsoutput" ->
                 res <- { res with MinJSOutputPath = Some (getPath k v) }
+            | "singlenojserrors" ->
+                res <- { res with SingleNoJSErrors = getBool k v }
             | "$schema" -> ()
             | _ -> failwithf "Unrecognized setting in wsconfig.json: %s" k 
         res
