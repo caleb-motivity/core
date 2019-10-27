@@ -39,7 +39,7 @@ group build
     nuget Mono.Cecil
 
 group wsbuild
-    git https://github.com/dotnet-websharper/build-script
+    git https://github.com/dotnet-websharper/build-script fake5
 
 group includes
     references: strict
